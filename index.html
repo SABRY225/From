@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {text-align: center;}
+        #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;}
+        
+    </style>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="enterDetails" >
+        <h1>Enter details</h1>
+
+        <h4>ID</h4> 
+        <input id="enterID" type="text" style="width: 180px;height: 22px;border-radius: 10px;"> 
+
+        <h4>First Name</h4> 
+        <input id="enterFName" type="text" style="width: 180px;height: 22px;border-radius: 10px;"> 
+        <h4>Last Name</h4> 
+        <input id="enterLName" type="text" style="width: 180px;height: 22px;border-radius: 10px;"> 
+
+        <h4>Age</h4> 
+        <input id="enterAge" type="number" style="width: 180px;height: 22px;border-radius: 10px;"> <br><br>
+
+        <h4>university</h4> 
+        <input id="enteruniversity" type="text" style="width: 180px;height: 22px;border-radius: 10px;"> 
+
+        <h4> college</h4> 
+        <input id="entercollege" type="text" style="width: 180px;height: 22px;border-radius: 10px;">
+        <h4> Level</h4> 
+        <input id="enterLevel" type="text" style="width: 180px;height: 22px;border-radius: 10px;">  
+        <br>
+
+        <button id="insert">INSERT</button>
+    </div>
+
+    <script type="module" >
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDr42hQoPnNQK9yFNy-NWDTAGUzPEEjKsI",
+          authDomain: "tast2-d15fe.firebaseapp.com",
+          databaseURL: "https://tast2-d15fe-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "tast2-d15fe",
+          storageBucket: "tast2-d15fe.appspot.com",
+          messagingSenderId: "383798876343",
+          appId: "1:383798876343:web:717067ac5e5b073ecf5532"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import{getDatabase,set,get,update,remove,ref ,child} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"
+        const db = getDatabase();
+
+var enterID = document.querySelector("#enterID");
+var enterFName = document.querySelector("#enterFName");
+var enterLName = document.querySelector("#enterLName");
+var enterAge = document.querySelector("#enterAge");
+var enterUniversity = document.querySelector("#enteruniversity");
+var enterCollege = document.querySelector("#entercollege");
+var enterLevel= document.querySelector("#enterLevel");
+
+
+var insertBtn = document.querySelector("#insert");
+
+
+function InsertData() {
+    set(ref(db, "People/"+ enterID.value),{
+        FName: enterFName.value,
+        LName: enterLName.value,
+        ID: enterID.value,
+        Age: enterAge.value,
+        University: enterUniversity.value,
+        College :enterCollege.value,
+        Level: enterLevel.value
+    })
+    .then(()=>{
+        alert("Data added successfully");
+    })
+    .catch((error)=>{
+        alert(error);
+    });
+}
+
+
+
+insertBtn.addEventListener('click', InsertData);
+      </script>
+</body>
+</html>
